@@ -1,5 +1,8 @@
 package com.lntech.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -88,6 +91,7 @@ public class Adress implements Serializable {
         this.postalCode = postalCode;
     }
 
+    @JsonIgnore
     public Costumer getCustomer() {
         return costumer;
     }
