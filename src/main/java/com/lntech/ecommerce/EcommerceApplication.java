@@ -1,13 +1,7 @@
 package com.lntech.ecommerce;
 
-import com.lntech.ecommerce.domain.Categorie;
-import com.lntech.ecommerce.domain.City;
-import com.lntech.ecommerce.domain.Estate;
-import com.lntech.ecommerce.domain.Product;
-import com.lntech.ecommerce.repositories.CategorieRepository;
-import com.lntech.ecommerce.repositories.CityRepository;
-import com.lntech.ecommerce.repositories.EstateRepository;
-import com.lntech.ecommerce.repositories.ProductRepository;
+import com.lntech.ecommerce.domain.*;
+import com.lntech.ecommerce.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,6 +26,12 @@ public class EcommerceApplication implements CommandLineRunner {
 	@Autowired
 	private CityRepository cityRepository;
 
+	@Autowired
+	private CostumerRepository costumerRepository;
+
+	@Autowired
+	private AdressRepository adressRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceApplication.class, args);
@@ -40,7 +40,7 @@ public class EcommerceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 		Categorie cat1 = new Categorie(null,"Computers");
 		Categorie cat2 = new Categorie(null,"Books");
 		Categorie cat3 = new Categorie(null,"Eletronics");
@@ -79,7 +79,16 @@ public class EcommerceApplication implements CommandLineRunner {
 		estateRepository.saveAll(Arrays.asList(estate1,estate2,estate3));
 		cityRepository.saveAll(Arrays.asList(city1,city2,city3,city4));
 
+		Costumer costumer1 = new Costumer(null,"Luan","luanreis2202@gmail.com","451.253.220-08",TypeClient.NATURALPERSON);
+		costumer1.getTelephones().addAll(Arrays.asList("13 996735588","13 997564216"));
 
+		Adress adress1 = new Adress(null,"Rua Josefina Bakhita","527","Casa 1","Vila Sonia","11722330",costumer1,city1);
+		Adress adress2 = new Adress(null,"Avenida Paulista","134","AP 22","Jardim Paulista","13574391",costumer1,city2);
+
+		costumer1.getAdresses().addAll(Arrays.asList(adress1,adress2));
+
+		costumerRepository.saveAll(Arrays.asList(costumer1));
+		adressRepository.saveAll(Arrays.asList(adress1,adress2));
 
 	}
 
