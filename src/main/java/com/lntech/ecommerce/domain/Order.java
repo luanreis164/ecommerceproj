@@ -3,7 +3,9 @@ package com.lntech.ecommerce.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "Orders")
 public class Order implements Serializable {
@@ -25,6 +27,10 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "adress_id")
     private Adress deliveryAdress;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<ItemOrdered> itens = new HashSet<>();
+
 
     public Order() {
     }
@@ -74,6 +80,14 @@ public class Order implements Serializable {
 
     public void setDeliveryAdress(Adress deliveryAdress) {
         this.deliveryAdress = deliveryAdress;
+    }
+
+    public Set<ItemOrdered> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemOrdered> itens) {
+        this.itens = itens;
     }
 
     @Override

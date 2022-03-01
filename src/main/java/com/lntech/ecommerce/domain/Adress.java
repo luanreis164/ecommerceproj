@@ -1,6 +1,5 @@
 package com.lntech.ecommerce.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -15,7 +14,7 @@ public class Adress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String adress;
+    private String address;
     private String number;
     private String complement;
     private String neighborhood;
@@ -32,9 +31,9 @@ public class Adress implements Serializable {
     public Adress() {
     }
 
-    public Adress(Integer id, String adress, String number, String complement, String neighborhood, String postalCode, Costumer costumer, City city) {
+    public Adress(Integer id, String address, String number, String complement, String neighborhood, String postalCode, Costumer costumer, City city) {
         this.id = id;
-        this.adress = adress;
+        this.address = address;
         this.number = number;
         this.complement = complement;
         this.neighborhood = neighborhood;
@@ -51,12 +50,12 @@ public class Adress implements Serializable {
         this.id = id;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getNumber() {

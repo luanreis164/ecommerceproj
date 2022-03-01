@@ -41,6 +41,8 @@ public class EcommerceApplication implements CommandLineRunner {
 	@Autowired
 	private PaymentRepository paymentRepository;
 
+	@Autowired
+	private ItemOrderedRepository itemOrderedRepository;
 
 
 	public static void main(String[] args) {
@@ -106,7 +108,7 @@ public class EcommerceApplication implements CommandLineRunner {
 		Order order1 = new Order(null,sdf.parse("30/03/2022 12:30:00"),costumer1,adress1);
 		Order order2= new Order(null,sdf.parse("20/04/2022 11:15:00"),costumer1,adress2);
 
-		
+
 		Payment payment1 = new PaymentCard(null, StatePayment.SETTLED,order1,6);
 		order1.setPayment(payment1);
 
@@ -118,7 +120,19 @@ public class EcommerceApplication implements CommandLineRunner {
 		orderRepository.saveAll(Arrays.asList(order1,order2));
 		paymentRepository.saveAll(Arrays.asList(payment1,payment2));
 
+		ItemOrdered itemOrdered1 = new ItemOrdered(order1,product1,0.00,1,2.000);
+		ItemOrdered itemOrdered2 = new ItemOrdered(order1,product3,0.00,2,80.00);
+		ItemOrdered itemOrdered3 = new ItemOrdered(order2,product2,100.00,1,800.00);
 
+		order1.getItens().addAll(Arrays.asList(itemOrdered1,itemOrdered2));
+		order2.getItens().addAll(Arrays.asList(itemOrdered3));
+
+		product1.getItens().addAll(Arrays.asList(itemOrdered1));
+		product2.getItens().addAll(Arrays.asList(itemOrdered3));
+		product3.getItens().addAll(Arrays.asList(itemOrdered2));
+
+		itemOrderedRepository.saveAll(Arrays.asList(itemOrdered1,itemOrdered2,itemOrdered3));
+		
 
 	}
 
