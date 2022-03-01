@@ -1,5 +1,6 @@
 package com.lntech.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lntech.ecommerce.domain.enums.StatePayment;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public abstract class Payment implements Serializable {
 
     private Integer statePayment;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "order_id")
     @MapsId

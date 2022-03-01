@@ -1,5 +1,6 @@
 package com.lntech.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lntech.ecommerce.domain.enums.TypeClient;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Costumer implements Serializable {
     @CollectionTable(name = "TELEPHONE")
     private Set<String> telephones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "costumer")
     private List<Order> orders = new ArrayList<>();
 

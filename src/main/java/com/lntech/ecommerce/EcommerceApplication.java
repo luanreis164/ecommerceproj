@@ -103,16 +103,16 @@ public class EcommerceApplication implements CommandLineRunner {
 		adressRepository.saveAll(Arrays.asList(adress1,adress2));
 
 		//Mudando o formato de instanciação da data//
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		Order order1 = new Order(null,sdf.parse("30/03/2022 12:30:00"),costumer1,adress1);
-		Order order2= new Order(null,sdf.parse("20/04/2022 11:15:00"),costumer1,adress2);
+		Order order1 = new Order(null,sdf.parse("30/03/2022 12:30"),costumer1,adress1);
+		Order order2= new Order(null,sdf.parse("20/04/2022 11:15"),costumer1,adress2);
 
 
 		Payment payment1 = new PaymentCard(null, StatePayment.SETTLED,order1,6);
 		order1.setPayment(payment1);
 
-		Payment payment2 = new PaymentBillet(null, StatePayment.PENDING,order2 ,sdf.parse("20/03/2022 00:00:00"),null);
+		Payment payment2 = new PaymentBillet(null, StatePayment.PENDING,order2 ,sdf.parse("20/03/2022 00:00"),null);
 		order2.setPayment(payment2);
 
 		costumer1.getOrders().addAll(Arrays.asList(order1,order2));
@@ -132,7 +132,7 @@ public class EcommerceApplication implements CommandLineRunner {
 		product3.getItens().addAll(Arrays.asList(itemOrdered2));
 
 		itemOrderedRepository.saveAll(Arrays.asList(itemOrdered1,itemOrdered2,itemOrdered3));
-		
+
 
 	}
 
