@@ -1,6 +1,6 @@
 package com.lntech.ecommerce.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.lntech.ecommerce.domain.enums.TypeClient;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +28,9 @@ public class Costumer implements Serializable {
     @ElementCollection
     @CollectionTable(name = "TELEPHONE")
     private Set<String> telephones = new HashSet<>();
+
+    @OneToMany(mappedBy = "costumer")
+    private List<Order> orders = new ArrayList<>();
 
     public Costumer() {
     }
@@ -98,6 +101,18 @@ public class Costumer implements Serializable {
 
     public void setTelephones(Set<String> telephones) {
         this.telephones = telephones;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

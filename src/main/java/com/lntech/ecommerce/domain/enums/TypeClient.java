@@ -1,4 +1,4 @@
-package com.lntech.ecommerce.domain;
+package com.lntech.ecommerce.domain.enums;
 
 public enum TypeClient {
 

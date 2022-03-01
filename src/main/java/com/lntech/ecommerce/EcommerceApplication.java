@@ -1,12 +1,15 @@
 package com.lntech.ecommerce;
 
 import com.lntech.ecommerce.domain.*;
+import com.lntech.ecommerce.domain.enums.StatePayment;
+import com.lntech.ecommerce.domain.enums.TypeClient;
 import com.lntech.ecommerce.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +34,13 @@ public class EcommerceApplication implements CommandLineRunner {
 
 	@Autowired
 	private AdressRepository adressRepository;
+
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Autowired
+	private PaymentRepository paymentRepository;
+
 
 
 	public static void main(String[] args) {
@@ -67,7 +77,7 @@ public class EcommerceApplication implements CommandLineRunner {
 		Estate estate2 = new Estate(null,"Rio De Janeiro");
 		Estate estate3 = new Estate(null,"Rio Grande do Sul");
 
-		City city1 = new City(null,"Santos",estate1);
+		City city1 = new City(null,"Praia Grande",estate1);
 		City city2 = new City(null,"São Paulo",estate1);
 		City city3 = new City(null,"Rio de Janeiro",estate2);
 		City city4 = new City(null,"Porto Alegre",estate3);
@@ -79,7 +89,7 @@ public class EcommerceApplication implements CommandLineRunner {
 		estateRepository.saveAll(Arrays.asList(estate1,estate2,estate3));
 		cityRepository.saveAll(Arrays.asList(city1,city2,city3,city4));
 
-		Costumer costumer1 = new Costumer(null,"Luan","luanreis2202@gmail.com","451.253.220-08",TypeClient.NATURALPERSON);
+		Costumer costumer1 = new Costumer(null,"Luan","luanreis2202@gmail.com","451.253.220-08", TypeClient.NATURALPERSON);
 		costumer1.getTelephones().addAll(Arrays.asList("13 996735588","13 997564216"));
 
 		Adress adress1 = new Adress(null,"Rua Josefina Bakhita","527","Casa 1","Vila Sonia","11722330",costumer1,city1);
@@ -89,6 +99,26 @@ public class EcommerceApplication implements CommandLineRunner {
 
 		costumerRepository.saveAll(Arrays.asList(costumer1));
 		adressRepository.saveAll(Arrays.asList(adress1,adress2));
+
+		//Mudando o formato de instanciação da data//
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+		Order order1 = new Order(null,sdf.parse("30/03/2022 12:30:00"),costumer1,adress1);
+		Order order2= new Order(null,sdf.parse("20/04/2022 11:15:00"),costumer1,adress2);
+
+		
+		Payment payment1 = new PaymentCard(null, StatePayment.SETTLED,order1,6);
+		order1.setPayment(payment1);
+
+		Payment payment2 = new PaymentBillet(null, StatePayment.PENDING,order2 ,sdf.parse("20/03/2022 00:00:00"),null);
+		order2.setPayment(payment2);
+
+		costumer1.getOrders().addAll(Arrays.asList(order1,order2));
+
+		orderRepository.saveAll(Arrays.asList(order1,order2));
+		paymentRepository.saveAll(Arrays.asList(payment1,payment2));
+
+
 
 	}
 
