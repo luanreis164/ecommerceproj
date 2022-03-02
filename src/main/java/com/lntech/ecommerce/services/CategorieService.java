@@ -26,6 +26,11 @@ public class CategorieService {
         return obj;
     }
 
+    public Categorie insert(Categorie obj){
+        obj.setId(null);
+        return repo.save(obj);
+    }
+
 
 
 }
