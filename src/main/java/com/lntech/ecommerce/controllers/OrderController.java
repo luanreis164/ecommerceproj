@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping(value = "/orders")
@@ -19,13 +17,9 @@ public class OrderController {
     @Autowired
     private OrderService service;
 
-    @GetMapping
-    public List<Order> list() {
-        return service.listAll();
-    }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> find(@PathVariable Integer id) {
+    public ResponseEntity<Order> find(@PathVariable Integer id) {
         Order obj = service.findOne(id);
         return ResponseEntity.ok().body(obj);
     }

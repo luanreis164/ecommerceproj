@@ -2,8 +2,10 @@ package com.lntech.ecommerce.services;
 
 import com.lntech.ecommerce.domain.Categorie;
 import com.lntech.ecommerce.repositories.CategorieRepository;
+import com.lntech.ecommerce.services.exceptions.DataIntegrityException;
 import com.lntech.ecommerce.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class CategorieService {
     private CategorieRepository repo;
 
 
-    public Categorie findOne(Integer id){
+    public Categorie find(Integer id){
         Optional<Categorie> obj = repo.findById(id);
         return obj.orElseThrow( () -> new ObjectNotFoundException("Categoria não encontrada!Id:" + id + ",Tipo: " + Categorie.class.getName()) );
     }
@@ -32,8 +34,19 @@ public class CategorieService {
     }
 
     public Categorie update(Categorie obj){
-        findOne(obj.getId());
+        find(obj.getId());
         return repo.save(obj);
+    }
+
+    public void delete(Integer id){
+        find(id);
+        try{
+        repo.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos! ");
+        }
+
     }
 
 }

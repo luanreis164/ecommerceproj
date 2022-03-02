@@ -24,13 +24,13 @@ public class CategorieController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> find(@PathVariable Integer id){
-        Categorie obj = service.findOne(id);
+    public ResponseEntity<Categorie> find(@PathVariable Integer id){
+        Categorie obj = service.find(id);
         return  ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody Categorie obj){
+    public ResponseEntity<List<Categorie>> insert(@RequestBody Categorie obj){
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -40,12 +40,17 @@ public class CategorieController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody Categorie obj,@PathVariable Integer id ){
+    public ResponseEntity<Categorie> update(@RequestBody Categorie obj,@PathVariable Integer id ){
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
 
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

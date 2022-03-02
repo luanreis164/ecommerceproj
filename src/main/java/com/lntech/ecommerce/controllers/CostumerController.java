@@ -25,7 +25,7 @@ public class CostumerController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> find(@PathVariable Integer id){
+    public ResponseEntity<Costumer> find(@PathVariable Integer id){
         Costumer obj = service.findOne(id);
         return  ResponseEntity.ok().body(obj);
     }
