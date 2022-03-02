@@ -31,6 +31,9 @@ public class CategorieService {
         return repo.save(obj);
     }
 
-
+    public Categorie update(Categorie obj){
+        findOne(obj.getId());
+        return repo.save(obj);
+    }
 
 }
