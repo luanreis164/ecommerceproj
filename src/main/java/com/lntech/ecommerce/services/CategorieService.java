@@ -23,9 +23,8 @@ public class CategorieService {
         return obj.orElseThrow( () -> new ObjectNotFoundException("Categoria não encontrada!Id:" + id + ",Tipo: " + Categorie.class.getName()) );
     }
 
-    public List<Categorie> listAll(){
-        List<Categorie> obj = repo.findAll();
-        return obj;
+    public List<Categorie> findAll(){
+        return repo.findAll();
     }
 
     public Categorie insert(Categorie obj){

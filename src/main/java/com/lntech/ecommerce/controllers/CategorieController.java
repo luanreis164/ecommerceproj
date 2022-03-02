@@ -1,6 +1,7 @@
 package com.lntech.ecommerce.controllers;
 
 import com.lntech.ecommerce.domain.Categorie;
+import com.lntech.ecommerce.dto.CategorieDTO;
 import com.lntech.ecommerce.services.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -19,8 +21,10 @@ public class CategorieController {
     private CategorieService service;
 
     @GetMapping
-    public List<Categorie> list(){
-        return  service.listAll();
+    public ResponseEntity<List<CategorieDTO>> findAll(){
+        List<Categorie> list = service.findAll();
+        List<CategorieDTO> listDTO = list.stream().map(CategorieDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 
     @GetMapping(value = "/{id}")
