@@ -4,6 +4,7 @@ import com.lntech.ecommerce.domain.Categorie;
 import com.lntech.ecommerce.dto.CategorieDTO;
 import com.lntech.ecommerce.services.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -56,5 +57,22 @@ public class CategorieController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<CategorieDTO>> findPage(
+            @RequestParam(value = "page",defaultValue = "0")
+            Integer page,
+            @RequestParam(value = "linesPerPage",defaultValue = "24")
+            Integer linesPerPage,
+            @RequestParam(value = "orderBy",defaultValue = "name")
+            String orderBy,
+            @RequestParam(value = "direction",defaultValue = "ASC")
+            String direction){
+
+        Page<Categorie> list = service.findPage(page,linesPerPage,orderBy,direction);
+        Page<CategorieDTO> listDTO = list.map(CategorieDTO::new);
+        return ResponseEntity.ok().body(listDTO);
+    }
+
 
 }

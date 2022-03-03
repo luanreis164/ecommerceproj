@@ -56,10 +56,13 @@ public class EcommerceApplication implements CommandLineRunner {
 		Categorie cat1 = new Categorie(null,"Computers");
 		Categorie cat2 = new Categorie(null,"Books");
 		Categorie cat3 = new Categorie(null,"Eletronics");
+		Categorie cat4 = new Categorie(null,"Office");
+		Categorie cat5 = new Categorie(null,"Home & Health");
+		Categorie cat6 = new Categorie(null,"Garden");
 
 		List<Categorie> categories = new ArrayList<>();
 
-		categorieRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
+		categorieRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6));
 
 		Product product1 = new Product(null,"Monitor 24p" , 300.00);
 		Product product2 = new Product(null,"Mouse Gamer" , 139.99);
