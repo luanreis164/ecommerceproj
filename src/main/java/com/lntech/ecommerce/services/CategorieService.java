@@ -1,6 +1,7 @@
 package com.lntech.ecommerce.services;
 
 import com.lntech.ecommerce.domain.Categorie;
+import com.lntech.ecommerce.dto.CategorieDTO;
 import com.lntech.ecommerce.repositories.CategorieRepository;
 import com.lntech.ecommerce.services.exceptions.DataIntegrityException;
 import com.lntech.ecommerce.services.exceptions.ObjectNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class CategorieService {
@@ -56,6 +58,8 @@ public class CategorieService {
         return repo.findAll(pageRequest);
     }
 
-
+    public Categorie fromDTO(CategorieDTO categorieDTO){
+        return new Categorie(categorieDTO.getId(), categorieDTO.getName());
+    }
 
 }
