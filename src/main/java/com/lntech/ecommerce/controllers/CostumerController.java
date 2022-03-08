@@ -1,15 +1,16 @@
 package com.lntech.ecommerce.controllers;
 
 import com.lntech.ecommerce.domain.Costumer;
+import com.lntech.ecommerce.dto.CostumerDTO;
 import com.lntech.ecommerce.services.CostumerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -19,17 +20,50 @@ public class CostumerController {
     @Autowired
     private CostumerService service;
 
-    @GetMapping
-    public List<Costumer> list(){
-        return  service.listAll();
-    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Costumer> find(@PathVariable Integer id){
-        Costumer obj = service.findOne(id);
+        Costumer obj = service.find(id);
         return  ResponseEntity.ok().body(obj);
     }
 
+    @GetMapping
+    public ResponseEntity<List<CostumerDTO>> findAll(){
+        List<Costumer> list = service.findAll();
+        List<CostumerDTO> listDTO = list.stream().map(CostumerDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Costumer> update(@Valid @RequestBody CostumerDTO objDto, @PathVariable Integer id ){
+        Costumer obj = service.fromDTO(objDto);
+        obj.setId(id);
+        obj = service.update(obj);
+        return ResponseEntity.noContent().build();
+
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<CostumerDTO>> findPage(
+            @RequestParam(value = "page",defaultValue = "0")
+                    Integer page,
+            @RequestParam(value = "linesPerPage",defaultValue = "24")
+                    Integer linesPerPage,
+            @RequestParam(value = "orderBy",defaultValue = "name")
+                    String orderBy,
+            @RequestParam(value = "direction",defaultValue = "ASC")
+                    String direction){
+
+        Page<Costumer> list = service.findPage(page,linesPerPage,orderBy,direction);
+        Page<CostumerDTO> listDTO = list.map(CostumerDTO::new);
+        return ResponseEntity.ok().body(listDTO);
+    }
 
 
 }
