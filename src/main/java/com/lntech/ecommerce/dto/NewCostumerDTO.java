@@ -1,23 +1,52 @@
 package com.lntech.ecommerce.dto;
 
 
+import com.lntech.ecommerce.services.validation.CostumerInsert;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+@CostumerInsert
 public class NewCostumerDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Size(min = 3,max = 80,message = "O tamanho deve ser entre 3 e 80!")
     private String name;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Email(message = "Email inválido!")
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
     private String cpfOrCnpj;
+
     private Integer type;
 
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Size(min = 3,max = 80,message = "O tamanho deve ser entre 3 e 80 caracteres!")
     private String address;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Size(min = 1,max = 11,message = "O tamanho deve ser entre 1 e 11 caracteres!")
     private String number;
+
     private String complement;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Size(min = 3,max = 80,message = "O tamanho deve ser entre 3 e 80 caracteres!")
     private String neighborhood;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Size(min = 7,max = 10,message = "CEP inválido!")
     private String postalCode;
 
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    @Size(min = 11,max = 17,message = "O telefone deve ter o formato correto.")
     private String telephone1;
+
     private String telephone2;
     private String telephone3;
 
