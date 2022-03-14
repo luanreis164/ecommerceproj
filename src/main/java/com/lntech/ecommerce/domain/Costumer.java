@@ -23,7 +23,7 @@ public class Costumer implements Serializable {
 
     private Integer type;
 
-    @OneToMany(mappedBy = "costumer")
+    @OneToMany(mappedBy = "costumer",cascade = CascadeType.ALL)
     private List<Adress> adresses = new ArrayList<>();
 
     @ElementCollection
