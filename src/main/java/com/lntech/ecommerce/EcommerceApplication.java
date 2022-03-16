@@ -55,28 +55,52 @@ public class EcommerceApplication implements CommandLineRunner {
 
 		Categorie cat1 = new Categorie(null,"Computers");
 		Categorie cat2 = new Categorie(null,"Books");
-		Categorie cat3 = new Categorie(null,"Eletronics");
+		Categorie cat3 = new Categorie(null,"Consoles");
 		Categorie cat4 = new Categorie(null,"Office");
 		Categorie cat5 = new Categorie(null,"Home & Health");
 		Categorie cat6 = new Categorie(null,"Garden");
+		Categorie cat7 = new Categorie(null,"Games");
 
 		List<Categorie> categories = new ArrayList<>();
 
-		categorieRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6));
+		categorieRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
 
 		Product product1 = new Product(null,"Monitor 24p" , 300.00);
 		Product product2 = new Product(null,"Mouse Gamer" , 139.99);
 		Product product3 = new Product(null,"The Agile Manifesto" , 80.00);
+		Product product4 = new Product(null,"Red Dead Redemption 2  " , 109.99);
+		Product product5 = new Product(null,"Sekiro: Shadows Die Twice",115.00);
+		Product product6 = new Product(null,"Office Desk Chair Ergonomic",130.00);
+		Product product7 = new Product(null,"Dining Table Mats",15.00);
+		Product product8 = new Product(null,"Mousepad 120cmX60cm",60.00);
+		Product product9 = new Product(null,"Green Hammock",85.00);
+		Product product10 = new Product(null,"Rainbow Hammock",104.99);
+		Product product11 = new Product(null,"EA33 Printer/Scanner", 224.99);
 
-		cat1.getProducts().addAll(Arrays.asList(product1,product2));
+		cat1.getProducts().addAll(Arrays.asList(product1,product2,product8,product11));
 		cat2.getProducts().addAll(Arrays.asList(product3));
 		cat3.getProducts().addAll(Arrays.asList(product1,product2));
+		cat4.getProducts().addAll(Arrays.asList(product6,product8,product11));
+		cat5.getProducts().addAll(Arrays.asList(product9,product7));
+		cat6.getProducts().addAll(Arrays.asList(product9,product10));
+		cat7.getProducts().addAll(Arrays.asList(product4,product5));
+
 
 		product1.getCategories().addAll(Arrays.asList(cat1,cat3));
 		product2.getCategories().addAll(Arrays.asList(cat1,cat3));
 		product3.getCategories().addAll(Arrays.asList(cat2));
+		product4.getCategories().addAll(Arrays.asList(cat7));
+		product5.getCategories().addAll(Arrays.asList(cat7));
+		product6.getCategories().addAll(Arrays.asList(cat4));
+		product7.getCategories().addAll(Arrays.asList(cat5));
+		product8.getCategories().addAll(Arrays.asList(cat1,cat4));
+		product9.getCategories().addAll(Arrays.asList(cat5,cat6));
+		product10.getCategories().addAll(Arrays.asList(cat5,cat6));
+		product11.getCategories().addAll(Arrays.asList(cat4,cat1));
 
-		productRepository.saveAll(Arrays.asList(product1,product2,product3));
+
+		productRepository.saveAll(Arrays.asList(product1,product2,product3,product4,product5,product6,product7,product8,
+												product9,product10,product11));
 
 		Estate estate1 = new Estate(null,"São Paulo");
 		Estate estate2 = new Estate(null,"Rio De Janeiro");

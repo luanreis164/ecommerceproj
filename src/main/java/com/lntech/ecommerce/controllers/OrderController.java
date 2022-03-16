@@ -20,7 +20,7 @@ public class OrderController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> find(@PathVariable Integer id) {
-        Order obj = service.findOne(id);
+        Order obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
