@@ -147,9 +147,9 @@ public class EcommerceApplication implements CommandLineRunner {
 		orderRepository.saveAll(Arrays.asList(order1,order2));
 		paymentRepository.saveAll(Arrays.asList(payment1,payment2));
 
-		ItemOrdered itemOrdered1 = new ItemOrdered(order1,product1,0.00,1,2.000);
+		ItemOrdered itemOrdered1 = new ItemOrdered(order1,product1,0.00,1,300.00);
 		ItemOrdered itemOrdered2 = new ItemOrdered(order1,product3,0.00,2,80.00);
-		ItemOrdered itemOrdered3 = new ItemOrdered(order2,product2,100.00,1,800.00);
+		ItemOrdered itemOrdered3 = new ItemOrdered(order2,product2,0.00,1,139.99);
 
 		order1.getItens().addAll(Arrays.asList(itemOrdered1,itemOrdered2));
 		order2.getItens().addAll(Arrays.asList(itemOrdered3));
