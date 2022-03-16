@@ -1,12 +1,14 @@
 package com.lntech.ecommerce.dto;
 
 import com.lntech.ecommerce.domain.Costumer;
+import com.lntech.ecommerce.services.validation.CostumerUpdate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+@CostumerUpdate
 public class CostumerDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
