@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "Orders")
-public class Order implements Serializable {
+public class Order implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id

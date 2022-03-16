@@ -1,18 +1,20 @@
 package com.lntech.ecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.lntech.ecommerce.domain.enums.StatePayment;
 
 import javax.persistence.Entity;
 
 @Entity
-public class PaymentCard extends Payment{
+@JsonTypeName("PagamentoComCartao")
+public class CardPayment extends Payment{
 
     private Integer numberInstallments;
 
-    public PaymentCard() {
+    public CardPayment() {
     }
 
-    public PaymentCard(Integer id, StatePayment statePayment, Order order, Integer numberInstallments) {
+    public CardPayment(Integer id, StatePayment statePayment, Order order, Integer numberInstallments) {
         super(id, statePayment, order);
         this.numberInstallments = numberInstallments;
     }

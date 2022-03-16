@@ -136,10 +136,10 @@ public class EcommerceApplication implements CommandLineRunner {
 		Order order2= new Order(null,sdf.parse("20/04/2022 11:15"),costumer1,adress2);
 
 
-		Payment payment1 = new PaymentCard(null, StatePayment.SETTLED,order1,6);
+		Payment payment1 = new CardPayment(null, StatePayment.SETTLED,order1,6);
 		order1.setPayment(payment1);
 
-		Payment payment2 = new PaymentBillet(null, StatePayment.PENDING,order2 ,sdf.parse("20/03/2022 00:00"),null);
+		Payment payment2 = new BilletPayment(null, StatePayment.PENDING,order2 ,sdf.parse("20/03/2022 00:00"),null);
 		order2.setPayment(payment2);
 
 		costumer1.getOrders().addAll(Arrays.asList(order1,order2));

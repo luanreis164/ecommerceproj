@@ -25,7 +25,7 @@ public class ProductService {
 
     public Product find(Integer id){
         Optional<Product> obj = repo.findById(id);
-        return obj.orElseThrow( () -> new ObjectNotFoundException("Pedido não encontrado!Id:" + id + ",Tipo: " + Product.class.getName()) );
+        return obj.orElseThrow( () -> new ObjectNotFoundException("Produto não encontrado!Id:" + id + ",Tipo: " + Product.class.getName()) );
     }
 
     public Page<Product> search(String name,List<Integer> ids,Integer page,Integer linesPerPage,String orderBy,String direction){

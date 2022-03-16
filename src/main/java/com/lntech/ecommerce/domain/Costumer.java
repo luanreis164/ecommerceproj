@@ -1,6 +1,7 @@
 package com.lntech.ecommerce.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.lntech.ecommerce.domain.enums.TypeClient;
 
 import javax.persistence.*;
@@ -84,6 +85,7 @@ public class Costumer implements Serializable {
         return TypeClient.toEnum(type);
     }
 
+    @JsonSetter
     public void setType(TypeClient type) {
         this.type = type.getCod();
     }

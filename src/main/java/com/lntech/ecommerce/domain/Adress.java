@@ -39,7 +39,7 @@ public class Adress implements Serializable {
         this.neighborhood = neighborhood;
         this.postalCode = postalCode;
         this.costumer = costumer;
-        this.city = city;
+        this.setCity(city);
     }
 
     public Integer getId() {
