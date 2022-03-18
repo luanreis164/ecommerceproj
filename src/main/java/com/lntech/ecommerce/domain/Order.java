@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity(name = "Orders")
 public class Order implements Serializable{
@@ -77,11 +76,11 @@ public class Order implements Serializable{
         this.payment = payment;
     }
 
-    public Customer getCostumer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCostumer(Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -112,5 +111,30 @@ public class Order implements Serializable{
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("\n");
+        builder.append("Order number: ");
+        builder.append(getId());
+        builder.append(", Instant: ");
+        builder.append(sdf.format(getInstant()));
+        builder.append(", Customer: ");
+        builder.append(getCustomer().getName());
+        builder.append(", Payment state: ");
+        builder.append(getPayment().getStatePayment().getDescription());
+        builder.append("\nDetails:\n");
+        for(ItemOrdered ip : getItens()){
+            builder.append(ip.toString());
+        }
+        builder.append("Total: ");
+        builder.append(nf.format(getTotal()));
+        return builder.toString();
     }
 }
