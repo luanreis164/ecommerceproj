@@ -1,9 +1,9 @@
 package com.lntech.ecommerce.services.validation;
 
 import com.lntech.ecommerce.controllers.exceptions.FieldMessage;
-import com.lntech.ecommerce.domain.Costumer;
-import com.lntech.ecommerce.dto.CostumerDTO;
-import com.lntech.ecommerce.repositories.CostumerRepository;
+import com.lntech.ecommerce.domain.Customer;
+import com.lntech.ecommerce.dto.CustomerDTO;
+import com.lntech.ecommerce.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
@@ -14,17 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CostumerUpdateValidator implements ConstraintValidator<CostumerUpdate, CostumerDTO> {
+public class CustomerUpdateValidator implements ConstraintValidator<CustomerUpdate, CustomerDTO> {
 
     @Autowired
     public HttpServletRequest request;
 
     @Autowired
-    public CostumerRepository repo;
+    public CustomerRepository repo;
 
 
     @Override
-    public boolean isValid(CostumerDTO objDto, ConstraintValidatorContext context) {
+    public boolean isValid(CustomerDTO objDto, ConstraintValidatorContext context) {
 
         Map<String,String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
         Integer uriId = Integer.parseInt(map.get("id"));
@@ -33,7 +33,7 @@ public class CostumerUpdateValidator implements ConstraintValidator<CostumerUpda
         List<FieldMessage> list = new ArrayList<>();
 
 
-        Costumer aux = repo.findByEmail(objDto.getEmail());
+        Customer aux = repo.findByEmail(objDto.getEmail());
 
         if(aux != null && !aux.getId().equals(uriId)){
             list.add(new FieldMessage("email","Email ja cadastrado!"));

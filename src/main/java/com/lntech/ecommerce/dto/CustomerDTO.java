@@ -1,15 +1,15 @@
 package com.lntech.ecommerce.dto;
 
-import com.lntech.ecommerce.domain.Costumer;
-import com.lntech.ecommerce.services.validation.CostumerUpdate;
+import com.lntech.ecommerce.domain.Customer;
+import com.lntech.ecommerce.services.validation.CustomerUpdate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@CostumerUpdate
-public class CostumerDTO implements Serializable {
+@CustomerUpdate
+public class CustomerDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
@@ -22,13 +22,13 @@ public class CostumerDTO implements Serializable {
     @Email(message = "Email inválido!")
     private String email;
 
-    public CostumerDTO() {
+    public CustomerDTO() {
     }
 
-    public CostumerDTO(Costumer costumer){
-        id = costumer.getId();
-        name = costumer.getName();
-        email = costumer.getEmail();
+    public CustomerDTO(Customer customer){
+        id = customer.getId();
+        name = customer.getName();
+        email = customer.getEmail();
     }
 
     public Integer getId() {

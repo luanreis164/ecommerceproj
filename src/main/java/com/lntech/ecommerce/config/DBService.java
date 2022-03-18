@@ -29,7 +29,7 @@ public class DBService {
     private CityRepository cityRepository;
 
     @Autowired
-    private CostumerRepository costumerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     private AdressRepository adressRepository;
@@ -112,22 +112,22 @@ public class DBService {
         estateRepository.saveAll(Arrays.asList(estate1,estate2,estate3));
         cityRepository.saveAll(Arrays.asList(city1,city2,city3,city4));
 
-        Costumer costumer1 = new Costumer(null,"Luan","luanreis2202@gmail.com","451.253.220-08", TypeClient.NATURALPERSON);
-        costumer1.getTelephones().addAll(Arrays.asList("13 996735588","13 997564216"));
+        Customer customer1 = new Customer(null,"Luan","luanreis2202@gmail.com","451.253.220-08", TypeClient.NATURALPERSON);
+        customer1.getTelephones().addAll(Arrays.asList("13 996735588","13 997564216"));
 
-        Adress adress1 = new Adress(null,"Rua Josefina Bakhita","527","Casa 1","Vila Sonia","11722330",costumer1,city1);
-        Adress adress2 = new Adress(null,"Avenida Paulista","134","AP 22","Jardim Paulista","13574391",costumer1,city2);
+        Adress adress1 = new Adress(null,"Rua Josefina Bakhita","527","Casa 1","Vila Sonia","11722330", customer1,city1);
+        Adress adress2 = new Adress(null,"Avenida Paulista","134","AP 22","Jardim Paulista","13574391", customer1,city2);
 
-        costumer1.getAdresses().addAll(Arrays.asList(adress1,adress2));
+        customer1.getAdresses().addAll(Arrays.asList(adress1,adress2));
 
-        costumerRepository.saveAll(Arrays.asList(costumer1));
+        customerRepository.saveAll(Arrays.asList(customer1));
         adressRepository.saveAll(Arrays.asList(adress1,adress2));
 
         //Mudando o formato de instanciação da data//
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        Order order1 = new Order(null,sdf.parse("30/03/2022 12:30"),costumer1,adress1);
-        Order order2= new Order(null,sdf.parse("20/04/2022 11:15"),costumer1,adress2);
+        Order order1 = new Order(null,sdf.parse("30/03/2022 12:30"), customer1,adress1);
+        Order order2= new Order(null,sdf.parse("20/04/2022 11:15"), customer1,adress2);
 
 
         Payment payment1 = new CardPayment(null, StatePayment.SETTLED,order1,6);
@@ -136,7 +136,7 @@ public class DBService {
         Payment payment2 = new BilletPayment(null, StatePayment.PENDING,order2 ,sdf.parse("20/03/2022 00:00"),null);
         order2.setPayment(payment2);
 
-        costumer1.getOrders().addAll(Arrays.asList(order1,order2));
+        customer1.getOrders().addAll(Arrays.asList(order1,order2));
 
         orderRepository.saveAll(Arrays.asList(order1,order2));
         paymentRepository.saveAll(Arrays.asList(payment1,payment2));

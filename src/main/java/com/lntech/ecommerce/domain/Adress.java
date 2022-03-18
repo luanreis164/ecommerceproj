@@ -21,8 +21,8 @@ public class Adress implements Serializable {
     private String postalCode;
 
     @ManyToOne
-    @JoinColumn(name ="costumer_id")
-    private Costumer costumer;
+    @JoinColumn(name ="customer_id")
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name ="city_id")
@@ -31,14 +31,14 @@ public class Adress implements Serializable {
     public Adress() {
     }
 
-    public Adress(Integer id, String address, String number, String complement, String neighborhood, String postalCode, Costumer costumer, City city) {
+    public Adress(Integer id, String address, String number, String complement, String neighborhood, String postalCode, Customer customer, City city) {
         this.id = id;
         this.address = address;
         this.number = number;
         this.complement = complement;
         this.neighborhood = neighborhood;
         this.postalCode = postalCode;
-        this.costumer = costumer;
+        this.customer = customer;
         this.setCity(city);
     }
 
@@ -91,12 +91,12 @@ public class Adress implements Serializable {
     }
 
     @JsonIgnore
-    public Costumer getCustomer() {
-        return costumer;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomer(Costumer costumer) {
-        this.costumer = costumer;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public City getCity() {

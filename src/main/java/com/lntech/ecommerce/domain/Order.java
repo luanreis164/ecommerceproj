@@ -24,8 +24,8 @@ public class Order implements Serializable{
     private Payment payment;
 
     @ManyToOne
-    @JoinColumn(name = "costumer_id")
-    private Costumer costumer;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "adress_id")
@@ -38,10 +38,10 @@ public class Order implements Serializable{
     public Order() {
     }
 
-    public Order(Integer id, Date instant, Costumer costumer, Adress deliveryAdress) {
+    public Order(Integer id, Date instant, Customer customer, Adress deliveryAdress) {
         this.id = id;
         this.instant = instant;
-        this.costumer = costumer;
+        this.customer = customer;
         this.deliveryAdress = deliveryAdress;
     }
 
@@ -77,12 +77,12 @@ public class Order implements Serializable{
         this.payment = payment;
     }
 
-    public Costumer getCostumer() {
-        return costumer;
+    public Customer getCostumer() {
+        return customer;
     }
 
-    public void setCostumer(Costumer costumer) {
-        this.costumer = costumer;
+    public void setCostumer(Customer customer) {
+        this.customer = customer;
     }
 
     public Adress getDeliveryAdress() {

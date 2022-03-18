@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
-public class Costumer implements Serializable {
+public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -23,7 +23,7 @@ public class Costumer implements Serializable {
     private String cpfOrCnpj;
     private Integer type;
 
-    @OneToMany(mappedBy = "costumer",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Adress> adresses = new ArrayList<>();
 
     @ElementCollection
@@ -31,13 +31,13 @@ public class Costumer implements Serializable {
     private Set<String> telephones = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "costumer")
+    @OneToMany(mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
 
-    public Costumer() {
+    public Customer() {
     }
 
-    public Costumer(Integer id, String name, String email, String cpfOrCnpj, TypeClient type) {
+    public Customer(Integer id, String name, String email, String cpfOrCnpj, TypeClient type) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -122,8 +122,8 @@ public class Costumer implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Costumer costumer = (Costumer) o;
-        return Objects.equals(id, costumer.id);
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id);
     }
 
     @Override

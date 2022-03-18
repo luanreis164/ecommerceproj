@@ -1,10 +1,10 @@
 package com.lntech.ecommerce.services.validation;
 
 import com.lntech.ecommerce.controllers.exceptions.FieldMessage;
-import com.lntech.ecommerce.domain.Costumer;
+import com.lntech.ecommerce.domain.Customer;
 import com.lntech.ecommerce.domain.enums.TypeClient;
-import com.lntech.ecommerce.dto.NewCostumerDTO;
-import com.lntech.ecommerce.repositories.CostumerRepository;
+import com.lntech.ecommerce.dto.NewCustomerDTO;
+import com.lntech.ecommerce.repositories.CustomerRepository;
 import com.lntech.ecommerce.services.validation.utils.BR;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,18 +13,18 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CostumerInsertValidator implements ConstraintValidator<CostumerInsert, NewCostumerDTO> {
+public class CustomerInsertValidator implements ConstraintValidator<CustomerInsert, NewCustomerDTO> {
 
     @Autowired
-    public CostumerRepository repo;
+    public CustomerRepository repo;
 
 
     @Override
-    public void initialize(CostumerInsert constraintAnnotation) {
+    public void initialize(CustomerInsert constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(NewCostumerDTO objDto, ConstraintValidatorContext context) {
+    public boolean isValid(NewCustomerDTO objDto, ConstraintValidatorContext context) {
 
         List<FieldMessage> list = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class CostumerInsertValidator implements ConstraintValidator<CostumerInse
             list.add(new FieldMessage("cpfOrCnpj","CNPJ inválido!"));
         }
 
-        Costumer aux = repo.findByEmail(objDto.getEmail());
+        Customer aux = repo.findByEmail(objDto.getEmail());
 
         if(aux != null){
             list.add(new FieldMessage("email","Email ja cadastrado!"));

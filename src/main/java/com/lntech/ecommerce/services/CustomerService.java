@@ -1,15 +1,13 @@
 package com.lntech.ecommerce.services;
 
 import com.lntech.ecommerce.domain.Adress;
-import com.lntech.ecommerce.domain.Categorie;
 import com.lntech.ecommerce.domain.City;
-import com.lntech.ecommerce.domain.Costumer;
+import com.lntech.ecommerce.domain.Customer;
 import com.lntech.ecommerce.domain.enums.TypeClient;
-import com.lntech.ecommerce.dto.CategorieDTO;
-import com.lntech.ecommerce.dto.CostumerDTO;
-import com.lntech.ecommerce.dto.NewCostumerDTO;
+import com.lntech.ecommerce.dto.CustomerDTO;
+import com.lntech.ecommerce.dto.NewCustomerDTO;
 import com.lntech.ecommerce.repositories.AdressRepository;
-import com.lntech.ecommerce.repositories.CostumerRepository;
+import com.lntech.ecommerce.repositories.CustomerRepository;
 import com.lntech.ecommerce.services.exceptions.DataIntegrityException;
 import com.lntech.ecommerce.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,26 +22,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CostumerService {
+public class CustomerService {
 
     @Autowired
-    private CostumerRepository repo;
+    private CustomerRepository repo;
 
     @Autowired
     private AdressRepository adressRepository;
 
 
-    public Costumer find(Integer id){
-        Optional<Costumer> obj = repo.findById(id);
-        return obj.orElseThrow( () -> new ObjectNotFoundException("Cliente não encontrado!Id:" + id + ",Tipo: " + Costumer.class.getName()) );
+    public Customer find(Integer id){
+        Optional<Customer> obj = repo.findById(id);
+        return obj.orElseThrow( () -> new ObjectNotFoundException("Cliente não encontrado!Id:" + id + ",Tipo: " + Customer.class.getName()) );
     }
 
-    public List<Costumer> findAll(){
-        List<Costumer> obj = repo.findAll();
+    public List<Customer> findAll(){
+        List<Customer> obj = repo.findAll();
         return obj;
     }
-    public Costumer update(Costumer obj){
-        Costumer newObj = find(obj.getId());
+    public Customer update(Customer obj){
+        Customer newObj = find(obj.getId());
         updateData(newObj,obj);
         return repo.save(newObj);
     }
@@ -59,39 +57,39 @@ public class CostumerService {
 
     }
 
-    public Page<Costumer> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+    public Page<Customer> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
         return repo.findAll(pageRequest);
     }
 
-    public Costumer fromDTO(CostumerDTO objDto){
-        return new Costumer(objDto.getId(), objDto.getName(), objDto.getEmail(),null,null);
+    public Customer fromDTO(CustomerDTO objDto){
+        return new Customer(objDto.getId(), objDto.getName(), objDto.getEmail(),null,null);
     }
 
-    public Costumer fromDTO(NewCostumerDTO objDto){
-        Costumer costumer = new Costumer(null, objDto.getName(), objDto.getEmail(), objDto.getCpfOrCnpj(), TypeClient.toEnum(objDto.getType()));
+    public Customer fromDTO(NewCustomerDTO objDto){
+        Customer customer = new Customer(null, objDto.getName(), objDto.getEmail(), objDto.getCpfOrCnpj(), TypeClient.toEnum(objDto.getType()));
         City city = new City(objDto.getCityId(), null,null);
-        Adress adress = new Adress(null,objDto.getAddress(), objDto.getNumber(), objDto.getComplement(), objDto.getNeighborhood(), objDto.getPostalCode(),costumer,city);
+        Adress adress = new Adress(null,objDto.getAddress(), objDto.getNumber(), objDto.getComplement(), objDto.getNeighborhood(), objDto.getPostalCode(), customer,city);
 
-        costumer.getAdresses().add(adress);
-        costumer.getTelephones().add(objDto.getTelephone1());
+        customer.getAdresses().add(adress);
+        customer.getTelephones().add(objDto.getTelephone1());
         if(objDto.getTelephone2() != null){
-            costumer.getTelephones().add(objDto.getTelephone2());
+            customer.getTelephones().add(objDto.getTelephone2());
         }
         if (objDto.getTelephone3() != null){
-            costumer.getTelephones().add(objDto.getTelephone3());
+            customer.getTelephones().add(objDto.getTelephone3());
         }
-        return costumer;
+        return customer;
     }
 
 
-    private void updateData(Costumer newObj, Costumer obj){
+    private void updateData(Customer newObj, Customer obj){
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
     }
 
     @Transactional
-    public Costumer insert(Costumer obj){
+    public Customer insert(Customer obj){
     obj.setId(null);
     obj = repo.save(obj);
     adressRepository.saveAll(obj.getAdresses());

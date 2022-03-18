@@ -1,15 +1,15 @@
 package com.lntech.ecommerce.dto;
 
 
-import com.lntech.ecommerce.services.validation.CostumerInsert;
+import com.lntech.ecommerce.services.validation.CustomerInsert;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@CostumerInsert
-public class NewCostumerDTO implements Serializable {
+@CustomerInsert
+public class NewCustomerDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
@@ -52,7 +52,7 @@ public class NewCostumerDTO implements Serializable {
 
     private Integer cityId;
 
-    public NewCostumerDTO() {
+    public NewCustomerDTO() {
     }
 
     public String getName() {
