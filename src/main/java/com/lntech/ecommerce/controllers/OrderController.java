@@ -1,11 +1,11 @@
 package com.lntech.ecommerce.controllers;
 
-import com.lntech.ecommerce.domain.Categorie;
 import com.lntech.ecommerce.domain.Order;
-import com.lntech.ecommerce.dto.CategorieDTO;
 import com.lntech.ecommerce.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -19,7 +19,6 @@ public class OrderController {
 
     @Autowired
     private OrderService service;
-
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> find(@PathVariable Integer id) {
@@ -36,5 +35,19 @@ public class OrderController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping
+    public ResponseEntity<Page<Order>> findPage(
+            @RequestParam(value = "page",defaultValue = "0")
+                    Integer page,
+            @RequestParam(value = "linesPerPage",defaultValue = "24")
+                    Integer linesPerPage,
+            @RequestParam(value = "orderBy",defaultValue = "instant")
+                    String orderBy,
+            @RequestParam(value = "direction",defaultValue = "DESC")
+                    String direction){
+
+        Page<Order> list = service.findPage(page,linesPerPage,orderBy,direction);
+        return ResponseEntity.ok().body(list);
+    }
 
 }

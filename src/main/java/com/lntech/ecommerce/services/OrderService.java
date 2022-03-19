@@ -1,15 +1,17 @@
 package com.lntech.ecommerce.services;
 
-import com.lntech.ecommerce.domain.Adress;
-import com.lntech.ecommerce.domain.ItemOrdered;
-import com.lntech.ecommerce.domain.Order;
-import com.lntech.ecommerce.domain.BilletPayment;
+import com.lntech.ecommerce.domain.*;
 import com.lntech.ecommerce.domain.enums.StatePayment;
 import com.lntech.ecommerce.repositories.ItemOrderedRepository;
 import com.lntech.ecommerce.repositories.OrderRepository;
 import com.lntech.ecommerce.repositories.PaymentRepository;
+import com.lntech.ecommerce.security.UserSS;
+import com.lntech.ecommerce.services.exceptions.AuthorizationException;
 import com.lntech.ecommerce.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,6 +71,16 @@ public class OrderService {
         emailService.sendOrderConfirmationEmail(obj);
 
         return obj;
+    }
+
+    public Page<Order> findPage(Integer page,Integer linesPerPage,String orderBy,String direction){
+        UserSS user = UserService.authenticated();
+        if(user == null) {
+            throw new AuthorizationException("Acesso negado!");
+        }
+        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
+        Customer customer = customerService.find(user.getId());
+        return repo.findByCustomer(customer,pageRequest);
     }
 
 
