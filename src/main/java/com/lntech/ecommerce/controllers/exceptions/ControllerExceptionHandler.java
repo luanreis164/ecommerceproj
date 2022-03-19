@@ -1,5 +1,6 @@
 package com.lntech.ecommerce.controllers.exceptions;
 
+import com.lntech.ecommerce.services.exceptions.AuthorizationException;
 import com.lntech.ecommerce.services.exceptions.DataIntegrityException;
 import com.lntech.ecommerce.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -38,5 +39,10 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorizationEception(AuthorizationException e, HttpServletRequest request){
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(),System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
 
 }

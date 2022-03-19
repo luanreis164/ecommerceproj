@@ -3,11 +3,14 @@ package com.lntech.ecommerce.services;
 import com.lntech.ecommerce.domain.Adress;
 import com.lntech.ecommerce.domain.City;
 import com.lntech.ecommerce.domain.Customer;
+import com.lntech.ecommerce.domain.enums.Profile;
 import com.lntech.ecommerce.domain.enums.TypeClient;
 import com.lntech.ecommerce.dto.CustomerDTO;
 import com.lntech.ecommerce.dto.NewCustomerDTO;
 import com.lntech.ecommerce.repositories.AdressRepository;
 import com.lntech.ecommerce.repositories.CustomerRepository;
+import com.lntech.ecommerce.security.UserSS;
+import com.lntech.ecommerce.services.exceptions.AuthorizationException;
 import com.lntech.ecommerce.services.exceptions.DataIntegrityException;
 import com.lntech.ecommerce.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,12 @@ public class CustomerService {
 
 
     public Customer find(Integer id){
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())){
+            throw new AuthorizationException("Acesso negado!");
+        }
+
+
         Optional<Customer> obj = repo.findById(id);
         return obj.orElseThrow( () -> new ObjectNotFoundException("Cliente não encontrado!Id:" + id + ",Tipo: " + Customer.class.getName()) );
     }
