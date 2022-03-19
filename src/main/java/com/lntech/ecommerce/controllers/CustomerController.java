@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping(value = "/costumers")
-public class CostumerController {
+@RequestMapping(value = "/customers")
+public class CustomerController {
 
     @Autowired
     private CustomerService service;

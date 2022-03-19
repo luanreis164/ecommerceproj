@@ -1,5 +1,8 @@
 package com.lntech.ecommerce.config;
 
+import com.lntech.ecommerce.services.EmailService;
+import com.lntech.ecommerce.services.MockEmailService;
+import com.lntech.ecommerce.services.SmtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,4 +30,10 @@ public class DevConfig {
         dbService.instantiateTestDatabase();
         return true;
     }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpService();
+    }
+
 }
