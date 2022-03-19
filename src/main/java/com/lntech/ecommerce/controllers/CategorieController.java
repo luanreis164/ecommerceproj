@@ -6,6 +6,7 @@ import com.lntech.ecommerce.services.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -35,6 +36,7 @@ public class CategorieController {
         return  ResponseEntity.ok().body(obj);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Categorie> insert(@Valid @RequestBody CategorieDTO objDto){
         Categorie obj = service.fromDTO(objDto);
@@ -45,6 +47,7 @@ public class CategorieController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PreAuthorize("hasAnyHole('ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Categorie> update(@Valid @RequestBody CategorieDTO objDto,@PathVariable Integer id ){
         Categorie obj = service.fromDTO(objDto);
@@ -54,6 +57,7 @@ public class CategorieController {
 
     }
 
+    @PreAuthorize("hasAnyHole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
