@@ -5,6 +5,9 @@ import com.lntech.ecommerce.domain.enums.StatePayment;
 import com.lntech.ecommerce.domain.enums.TypeClient;
 import com.lntech.ecommerce.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @Service
 public class DBService {
+
 
     @Autowired
     private CategorieRepository categorieRepository;
@@ -42,6 +46,9 @@ public class DBService {
 
     @Autowired
     private ItemOrderedRepository itemOrderedRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
 
 
@@ -112,7 +119,7 @@ public class DBService {
         estateRepository.saveAll(Arrays.asList(estate1,estate2,estate3));
         cityRepository.saveAll(Arrays.asList(city1,city2,city3,city4));
 
-        Customer customer1 = new Customer(null,"Luan","luanreis2202@gmail.com","451.253.220-08", TypeClient.NATURALPERSON);
+        Customer customer1 = new Customer(null,"Luan","luanreis2202@gmail.com","451.253.220-08", TypeClient.NATURALPERSON ,pe.encode("LuaN2202"));
         customer1.getTelephones().addAll(Arrays.asList("13 996735588","13 997564216"));
 
         Adress adress1 = new Adress(null,"Rua Josefina Bakhita","527","Casa 1","Vila Sonia","11722330", customer1,city1);

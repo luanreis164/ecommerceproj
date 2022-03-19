@@ -23,6 +23,9 @@ public class Customer implements Serializable {
     private String cpfOrCnpj;
     private Integer type;
 
+    @JsonIgnore
+    private String password;
+
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Adress> adresses = new ArrayList<>();
 
@@ -37,12 +40,13 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(Integer id, String name, String email, String cpfOrCnpj, TypeClient type) {
+    public Customer(Integer id, String name, String email, String cpfOrCnpj, TypeClient type,String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.cpfOrCnpj = cpfOrCnpj;
         this.type = (type == null) ? null : type.getCod();
+        this.password = password;
     }
 
     public static long getSerialVersionUID() {
@@ -116,6 +120,14 @@ public class Customer implements Serializable {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

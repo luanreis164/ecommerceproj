@@ -26,6 +26,9 @@ public class NewCustomerDTO implements Serializable {
     private Integer type;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
+    private String password;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
     @Size(min = 3,max = 80,message = "O tamanho deve ser entre 3 e 80 caracteres!")
     private String address;
 
@@ -157,5 +160,13 @@ public class NewCustomerDTO implements Serializable {
 
     public void setCityId(Integer cityId) {
         this.cityId = cityId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
