@@ -2,11 +2,13 @@ package com.lntech.ecommerce.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.lntech.ecommerce.domain.enums.Profile;
 import com.lntech.ecommerce.domain.enums.TypeClient;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Customer implements Serializable {
@@ -37,7 +39,12 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PROFILES")
+    private Set<Integer> profiles = new HashSet<>();
+
     public Customer() {
+        addProfile(Profile.CUSTOMER);
     }
 
     public Customer(Integer id, String name, String email, String cpfOrCnpj, TypeClient type,String password) {
@@ -47,6 +54,7 @@ public class Customer implements Serializable {
         this.cpfOrCnpj = cpfOrCnpj;
         this.type = (type == null) ? null : type.getCod();
         this.password = password;
+        addProfile(Profile.CUSTOMER);
     }
 
     public static long getSerialVersionUID() {
@@ -128,6 +136,14 @@ public class Customer implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Profile> getProfiles() {
+        return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+    }
+
+    public void addProfile(Profile profile) {
+        profiles.add(profile.getCod());
     }
 
     @Override

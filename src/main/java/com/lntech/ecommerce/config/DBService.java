@@ -1,6 +1,7 @@
 package com.lntech.ecommerce.config;
 
 import com.lntech.ecommerce.domain.*;
+import com.lntech.ecommerce.domain.enums.Profile;
 import com.lntech.ecommerce.domain.enums.StatePayment;
 import com.lntech.ecommerce.domain.enums.TypeClient;
 import com.lntech.ecommerce.repositories.*;
@@ -121,13 +122,19 @@ public class DBService {
 
         Customer customer1 = new Customer(null,"Luan","luanreis2202@gmail.com","451.253.220-08", TypeClient.NATURALPERSON ,pe.encode("LuaN2202"));
         customer1.getTelephones().addAll(Arrays.asList("13 996735588","13 997564216"));
+        customer1.addProfile(Profile.ADMIN);
+
+        Customer customer2 = new Customer(null,"Saulo","saulo@gmail.com","939.305.270-06", TypeClient.NATURALPERSON ,pe.encode("123"));
+        customer2.getTelephones().addAll(Arrays.asList("11 996221112","11 988777452"));
 
         Adress adress1 = new Adress(null,"Rua Josefina Bakhita","527","Casa 1","Vila Sonia","11722330", customer1,city1);
         Adress adress2 = new Adress(null,"Avenida Paulista","134","AP 22","Jardim Paulista","13574391", customer1,city2);
+        Adress adress3 = new Adress(null,"Avenida São Jorge","211","AP 221","Capão Redondo","11233221", customer2,city2);
 
         customer1.getAdresses().addAll(Arrays.asList(adress1,adress2));
+        customer2.getAdresses().addAll(Arrays.asList(adress3));
 
-        customerRepository.saveAll(Arrays.asList(customer1));
+        customerRepository.saveAll(Arrays.asList(customer1,customer2));
         adressRepository.saveAll(Arrays.asList(adress1,adress2));
 
         //Mudando o formato de instanciação da data//
