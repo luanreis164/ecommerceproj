@@ -1,6 +1,7 @@
 package com.lntech.ecommerce.config;
 
 import com.lntech.ecommerce.security.JWTAuthenticationFilter;
+import com.lntech.ecommerce.security.JWTAuthorizationFilter;
 import com.lntech.ecommerce.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -65,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(),jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(),jwtUtil,userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
