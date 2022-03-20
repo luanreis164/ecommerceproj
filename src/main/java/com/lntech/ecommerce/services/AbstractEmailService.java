@@ -1,5 +1,6 @@
 package com.lntech.ecommerce.services;
 
+import com.lntech.ecommerce.domain.Customer;
 import com.lntech.ecommerce.domain.Order;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -26,4 +27,22 @@ public abstract class AbstractEmailService implements EmailService {
         sm.setText(obj.toString());
         return sm;
     }
+
+    @Override
+    public void sendNewPasswordEmail(Customer customer,String newPass){
+        SimpleMailMessage sm = prepareNewPasswordEmail(customer,newPass);
+        sendEmail(sm);
+    }
+
+    protected SimpleMailMessage prepareNewPasswordEmail(Customer customer, String newPass){
+        SimpleMailMessage sm = new SimpleMailMessage();
+        sm.setTo(customer.getEmail());
+        sm.setFrom(sender);
+        sm.setSubject("Recover password! ");
+        sm.setSentDate(new Date(System.currentTimeMillis()));
+        sm.setText("New password: " + newPass);
+        return sm;
+
+    }
+
 }
