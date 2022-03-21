@@ -43,6 +43,8 @@ public class Customer implements Serializable {
     @CollectionTable(name = "PROFILES")
     private Set<Integer> profiles = new HashSet<>();
 
+    private String imageUrl;
+
     public Customer() {
         addProfile(Profile.CUSTOMER);
     }
@@ -144,6 +146,14 @@ public class Customer implements Serializable {
 
     public void addProfile(Profile profile) {
         profiles.add(profile.getCod());
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
