@@ -1,4 +1,4 @@
-package com.lntech.ecommerce.config;
+package com.lntech.ecommerce.services;
 
 import com.lntech.ecommerce.domain.*;
 import com.lntech.ecommerce.domain.enums.Profile;
