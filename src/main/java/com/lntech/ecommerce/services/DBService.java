@@ -63,8 +63,6 @@ public class DBService {
 
         List<Categorie> categories = new ArrayList<>();
 
-        categorieRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
-
         Product product1 = new Product(null,"Monitor 24p" , 300.00);
         Product product2 = new Product(null,"Mouse Gamer" , 139.99);
         Product product3 = new Product(null,"The Agile Manifesto" , 80.00);
@@ -76,8 +74,31 @@ public class DBService {
         Product product9 = new Product(null,"Green Hammock",85.00);
         Product product10 = new Product(null,"Rainbow Hammock",104.99);
         Product product11 = new Product(null,"EA33 Printer/Scanner", 224.99);
+        Product product12 = new Product(null,"Monitor 24p" , 300.00);
+        Product product13 = new Product(null,"Mouse Gamer" , 139.99);
+        Product product14 = new Product(null,"The Agile Manifesto" , 80.00);
+        Product product15 = new Product(null,"Red Dead Redemption 2  " , 109.99);
+        Product product16 = new Product(null,"Sekiro: Shadows Die Twice",115.00);
+        Product product17 = new Product(null,"Office Desk Chair Ergonomic",130.00);
+        Product product18 = new Product(null,"Dining Table Mats",15.00);
+        Product product19 = new Product(null,"Mousepad 120cmX60cm",60.00);
+        Product product20 = new Product(null,"Green Hammock",85.00);
+        Product product21 = new Product(null,"Rainbow Hammock",104.99);
+        Product product22 = new Product(null,"EA33 Printer/Scanner", 224.99);
+        Product product23 = new Product(null,"Monitor 24p" , 300.00);
+        Product product24 = new Product(null,"The Agile Manifesto" , 80.00);
+        Product product25 = new Product(null,"Red Dead Redemption 2  " , 109.99);
+        Product product26 = new Product(null,"Sekiro: Shadows Die Twice",115.00);
+        Product product27 = new Product(null,"Office Desk Chair Ergonomic",130.00);
+        Product product28 = new Product(null,"Dining Table Mats",15.00);
+        Product product29 = new Product(null,"Mousepad 120cmX60cm",60.00);
+        Product product30 = new Product(null,"Green Hammock",85.00);
+        Product product31 = new Product(null,"Rainbow Hammock",104.99);
+        Product product32 = new Product(null,"EA33 Printer/Scanner", 224.99);
 
-        cat1.getProducts().addAll(Arrays.asList(product1,product2,product8,product11));
+        cat1.getProducts().addAll(Arrays.asList(product1,product2,product8,product11,product12,product13,product14,product15,product16,product17,product18,product19,product20,product21,product22,
+                product23,product24,product25,product26,product27,product28,product29,product30,product31,product32));
+
         cat2.getProducts().addAll(Arrays.asList(product3));
         cat3.getProducts().addAll(Arrays.asList(product1,product2));
         cat4.getProducts().addAll(Arrays.asList(product6,product8,product11));
@@ -97,10 +118,36 @@ public class DBService {
         product9.getCategories().addAll(Arrays.asList(cat5,cat6));
         product10.getCategories().addAll(Arrays.asList(cat5,cat6));
         product11.getCategories().addAll(Arrays.asList(cat4,cat1));
+        product12.getCategories().addAll(Arrays.asList(cat1));
+        product13.getCategories().addAll(Arrays.asList(cat1));
+        product14.getCategories().addAll(Arrays.asList(cat1));
+        product15.getCategories().addAll(Arrays.asList(cat1));
+        product16.getCategories().addAll(Arrays.asList(cat1));
+        product17.getCategories().addAll(Arrays.asList(cat1));
+        product18.getCategories().addAll(Arrays.asList(cat1));
+        product19.getCategories().addAll(Arrays.asList(cat1));
+        product20.getCategories().addAll(Arrays.asList(cat1));
+        product21.getCategories().addAll(Arrays.asList(cat1));
+        product22.getCategories().addAll(Arrays.asList(cat1));
+        product23.getCategories().addAll(Arrays.asList(cat1));
+        product24.getCategories().addAll(Arrays.asList(cat1));
+        product25.getCategories().addAll(Arrays.asList(cat1));
+        product26.getCategories().addAll(Arrays.asList(cat1));
+        product27.getCategories().addAll(Arrays.asList(cat1));
+        product28.getCategories().addAll(Arrays.asList(cat1));
+        product29.getCategories().addAll(Arrays.asList(cat1));
+        product30.getCategories().addAll(Arrays.asList(cat1));
+        product31.getCategories().addAll(Arrays.asList(cat1));
+        product32.getCategories().addAll(Arrays.asList(cat1));
 
+        categorieRepository.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
 
         productRepository.saveAll(Arrays.asList(product1,product2,product3,product4,product5,product6,product7,product8,
                 product9,product10,product11));
+
+        productRepository.saveAll(Arrays.asList(product12,product13,product14,product15,product16,product17,product18,product19,product20,
+                product21,product22,product23,product24,product25,product26,product27,product28,product29,product30,product31,product32 ));
+
 
         State state1 = new State(null,"São Paulo");
         State state2 = new State(null,"Rio De Janeiro");
@@ -165,6 +212,7 @@ public class DBService {
         product3.getItens().addAll(Arrays.asList(itemOrdered2));
 
         itemOrderedRepository.saveAll(Arrays.asList(itemOrdered1,itemOrdered2,itemOrdered3));
+
 
 
     }
