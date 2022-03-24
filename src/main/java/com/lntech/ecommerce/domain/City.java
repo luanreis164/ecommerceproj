@@ -15,16 +15,16 @@ public class City implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "estate_id")
-    private Estate estate;
+    @JoinColumn(name = "state_id")
+    private State state;
 
     public City() {
     }
 
-    public City(Integer id, String name, Estate estate) {
+    public City(Integer id, String name, State state) {
         this.id = id;
         this.name = name;
-        this.estate = estate;
+        this.state = state;
     }
 
     public Integer getId() {
@@ -43,12 +43,12 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public Estate getEstate() {
-        return estate;
+    public State getEstate() {
+        return state;
     }
 
-    public void setEstate(Estate estate) {
-        this.estate = estate;
+    public void setEstate(State state) {
+        this.state = state;
     }
 
     @Override

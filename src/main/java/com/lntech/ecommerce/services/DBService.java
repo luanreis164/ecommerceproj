@@ -6,8 +6,6 @@ import com.lntech.ecommerce.domain.enums.StatePayment;
 import com.lntech.ecommerce.domain.enums.TypeClient;
 import com.lntech.ecommerce.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +26,7 @@ public class DBService {
     private ProductRepository productRepository;
 
     @Autowired
-    private EstateRepository estateRepository;
+    private StateRepository stateRepository;
 
     @Autowired
     private CityRepository cityRepository;
@@ -104,20 +102,20 @@ public class DBService {
         productRepository.saveAll(Arrays.asList(product1,product2,product3,product4,product5,product6,product7,product8,
                 product9,product10,product11));
 
-        Estate estate1 = new Estate(null,"São Paulo");
-        Estate estate2 = new Estate(null,"Rio De Janeiro");
-        Estate estate3 = new Estate(null,"Rio Grande do Sul");
+        State state1 = new State(null,"São Paulo");
+        State state2 = new State(null,"Rio De Janeiro");
+        State state3 = new State(null,"Rio Grande do Sul");
 
-        City city1 = new City(null,"Praia Grande",estate1);
-        City city2 = new City(null,"São Paulo",estate1);
-        City city3 = new City(null,"Rio de Janeiro",estate2);
-        City city4 = new City(null,"Porto Alegre",estate3);
+        City city1 = new City(null,"Praia Grande", state1);
+        City city2 = new City(null,"São Paulo", state1);
+        City city3 = new City(null,"Rio de Janeiro", state2);
+        City city4 = new City(null,"Porto Alegre", state3);
 
-        estate1.getCities().addAll(Arrays.asList(city1,city2));
-        estate2.getCities().addAll(Arrays.asList(city3));
-        estate3.getCities().addAll(Arrays.asList(city4));
+        state1.getCities().addAll(Arrays.asList(city1,city2));
+        state2.getCities().addAll(Arrays.asList(city3));
+        state3.getCities().addAll(Arrays.asList(city4));
 
-        estateRepository.saveAll(Arrays.asList(estate1,estate2,estate3));
+        stateRepository.saveAll(Arrays.asList(state1, state2, state3));
         cityRepository.saveAll(Arrays.asList(city1,city2,city3,city4));
 
         Customer customer1 = new Customer(null,"Luan","luanreis2202@gmail.com","451.253.220-08", TypeClient.NATURALPERSON ,pe.encode("LuaN2202"));

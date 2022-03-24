@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Estate implements Serializable {
+public class State implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -18,13 +18,13 @@ public class Estate implements Serializable {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "estate")
+    @OneToMany(mappedBy = "state")
     private List<City> cities = new ArrayList<>();
 
-    public Estate() {
+    public State() {
     }
 
-    public Estate(Integer id, String name) {
+    public State(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -57,8 +57,8 @@ public class Estate implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Estate estate = (Estate) o;
-        return Objects.equals(id, estate.id);
+        State state = (State) o;
+        return Objects.equals(id, state.id);
     }
 
     @Override
