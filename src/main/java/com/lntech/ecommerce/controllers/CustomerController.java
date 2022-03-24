@@ -32,6 +32,12 @@ public class CustomerController {
         return  ResponseEntity.ok().body(obj);
     }
 
+    @GetMapping(value = "/email")
+    public ResponseEntity<Customer> findByEmail(@RequestParam(value = "value")String email){
+        Customer obj = service.findByEmail(email);
+        return  ResponseEntity.ok().body(obj);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<CustomerDTO>> findAll(){
@@ -39,6 +45,7 @@ public class CustomerController {
         List<CustomerDTO> listDTO = list.stream().map(CustomerDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
     }
+
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Customer> update(@Valid @RequestBody CustomerDTO objDto, @PathVariable Integer id ){

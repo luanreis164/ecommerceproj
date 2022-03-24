@@ -134,10 +134,23 @@ public class CustomerService {
         jpgImage = imageService.cropSquare(jpgImage);
         jpgImage = imageService.resize(jpgImage,size);
 
-
         String fileName = prefix + user.getId() + ".jpg";
 
         return s3Service.uploadFile(imageService.getInputStream(jpgImage,"jpg"),fileName,"image" );
+
+    }
+
+    public Customer findByEmail(String email){
+
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Profile.ADMIN) && !email.equals(user.getUsername())){
+            throw new AuthorizationException("Acesso negado");
+        }
+        Customer customer = repo.findByEmail(email);
+        if(customer == null){
+            throw new ObjectNotFoundException("Cliente não encontrado! Email: " + user.getUsername() + ", Tipo: " + Customer.class.getName());
+        }
+        return customer;
 
     }
 
