@@ -1,6 +1,19 @@
 
 # Desenvolvendo um sistema de gerenciamento de pessoas em API REST com Spring Boot
 
+## Overview da API -
+
+ <p align="center">
+  <img src="https://im.ezgif.com/tmp/ezgif-1-1c557f30e0.gif">
+  </p>
+
+
+## Testes básicos Postman -
+ <p align="center">
+  <img src="https://im.ezgif.com/tmp/ezgif-1-ca8c14807a.gif">
+  </p>
+
+
 
 Ferramentas/Frameworks utilizados:
 -------------------------
