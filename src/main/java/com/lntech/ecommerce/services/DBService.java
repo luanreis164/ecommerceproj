@@ -53,12 +53,12 @@ public class DBService {
 
     public void instantiateTestDatabase() throws ParseException {
 
-        Categorie cat1 = new Categorie(null,"Computers");
-        Categorie cat2 = new Categorie(null,"Books");
+        Categorie cat1 = new Categorie(null,"Computadores");
+        Categorie cat2 = new Categorie(null,"Livros");
         Categorie cat3 = new Categorie(null,"Consoles");
-        Categorie cat4 = new Categorie(null,"Office");
-        Categorie cat5 = new Categorie(null,"Home & Health");
-        Categorie cat6 = new Categorie(null,"Garden");
+        Categorie cat4 = new Categorie(null,"Escritório");
+        Categorie cat5 = new Categorie(null,"Casa & Mais");
+        Categorie cat6 = new Categorie(null,"Jardim");
         Categorie cat7 = new Categorie(null,"Games");
 
         List<Categorie> categories = new ArrayList<>();
@@ -68,12 +68,12 @@ public class DBService {
         Product product3 = new Product(null,"The Agile Manifesto" , 80.00);
         Product product4 = new Product(null,"Red Dead Redemption 2  " , 109.99);
         Product product5 = new Product(null,"Sekiro: Shadows Die Twice",115.00);
-        Product product6 = new Product(null,"Office Desk Chair Ergonomic",130.00);
-        Product product7 = new Product(null,"Dining Table Mats",15.00);
+        Product product6 = new Product(null,"Cadeira de Escritorio Ergonomica",130.00);
+        Product product7 = new Product(null,"Jogo americano de mesa",15.00);
         Product product8 = new Product(null,"Mousepad 120cmX60cm",60.00);
-        Product product9 = new Product(null,"Green Hammock",85.00);
-        Product product10 = new Product(null,"Rainbow Hammock",104.99);
-        Product product11 = new Product(null,"EA33 Printer/Scanner", 224.99);
+        Product product9 = new Product(null,"Rede de balançar verde",85.00);
+        Product product10 = new Product(null,"Rede de balançar arco-íris",104.99);
+        Product product11 = new Product(null,"EA33 Impressora/Escaneadora", 224.99);
         Product product12 = new Product(null,"Monitor 24p" , 300.00);
         Product product13 = new Product(null,"Mouse Gamer" , 139.99);
         Product product14 = new Product(null,"The Agile Manifesto" , 80.00);
