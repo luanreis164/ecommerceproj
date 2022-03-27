@@ -29,7 +29,7 @@ Neste projeto, foi desenvolvidos e abordados os seguintes tópicos:
 
 * [Spring Boot Initialzr](https://start.spring.io/) para Setup inicial do projeto.
 * Criação de modelo de dados para o mapeamento de entidades em bancos de dados.
-* Desenvolvimento CRUD (Cadastro, leitura, atualização e remoção de pessoas/ojetos de um sistema).
+* Desenvolvimento de CRUD's (Cadastro, leitura, atualização e remoção de objetos do sistema).
 * Relação de cada uma das operações acima com o padrão arquitetural REST.
 * Implantação do sistema na nuvem através do Heroku
 -------------------------
