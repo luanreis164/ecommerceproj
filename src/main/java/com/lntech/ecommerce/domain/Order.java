@@ -31,7 +31,7 @@ public class Order implements Serializable{
     private Adress deliveryAdress;
 
     @OneToMany(mappedBy = "id.order")
-    private Set<ItemOrdered> itens = new HashSet<>();
+    private Set<ItemOrdered> items = new HashSet<>();
 
 
     public Order() {
@@ -46,7 +46,7 @@ public class Order implements Serializable{
 
     public double getTotal(){
         double sum = 0.0;
-        for(ItemOrdered io : itens){
+        for(ItemOrdered io : items){
             sum = sum + io.getSubTotal();
         }
         return sum;
@@ -92,12 +92,12 @@ public class Order implements Serializable{
         this.deliveryAdress = deliveryAdress;
     }
 
-    public Set<ItemOrdered> getItens() {
-        return itens;
+    public Set<ItemOrdered> getItems() {
+        return items;
     }
 
-    public void setItens(Set<ItemOrdered> itens) {
-        this.itens = itens;
+    public void setItems(Set<ItemOrdered> items) {
+        this.items = items;
     }
 
     @Override
@@ -130,7 +130,7 @@ public class Order implements Serializable{
         builder.append(", Payment state: ");
         builder.append(getPayment().getStatePayment().getDescription());
         builder.append("\nDetails:\n");
-        for(ItemOrdered ip : getItens()){
+        for(ItemOrdered ip : getItems()){
             builder.append(ip.toString());
         }
         builder.append("Total: ");

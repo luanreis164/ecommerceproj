@@ -6,7 +6,7 @@ import com.lntech.ecommerce.domain.enums.StatePayment;
 import javax.persistence.Entity;
 
 @Entity
-@JsonTypeName("PagamentoComCartao")
+@JsonTypeName("pagamentoComCartao")
 public class CardPayment extends Payment{
 
     private Integer numberInstallments;

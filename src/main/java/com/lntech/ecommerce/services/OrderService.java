@@ -61,13 +61,13 @@ public class OrderService {
         }
         obj = repo.save(obj);
         paymentRepository.save(obj.getPayment());
-        for(ItemOrdered io : obj.getItens()){
+        for(ItemOrdered io : obj.getItems()){
             io.setDiscount(0.0);
             io.setProduct(productService.find(io.getProduct().getId()));
             io.setPrice(io.getProduct().getPrice());
             io.setOrder(obj);
         }
-        itemOrderedRepository.saveAll(obj.getItens());
+        itemOrderedRepository.saveAll(obj.getItems());
         emailService.sendOrderConfirmationEmail(obj);
 
         return obj;
