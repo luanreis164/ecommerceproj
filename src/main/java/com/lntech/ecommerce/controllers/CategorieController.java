@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -80,5 +81,11 @@ public class CategorieController {
         return ResponseEntity.ok().body(listDTO);
     }
 
+    @PostMapping(value = "/{id}")
+    public ResponseEntity<Void> uploadCategoriePicture(@RequestParam(name = "file") MultipartFile multipartFile, @PathVariable Integer id){
+        URI uri = service.uploadCategoriePicture(multipartFile,id);
+        return ResponseEntity.created(uri).build();
+
+    }
 
 }

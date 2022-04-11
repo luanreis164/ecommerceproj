@@ -1,14 +1,20 @@
 package com.lntech.ecommerce.controllers;
 
 import com.lntech.ecommerce.controllers.utils.URL;
+import com.lntech.ecommerce.domain.Categorie;
 import com.lntech.ecommerce.domain.Product;
+import com.lntech.ecommerce.dto.CategorieDTO;
 import com.lntech.ecommerce.dto.ProductDTO;
 import com.lntech.ecommerce.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 

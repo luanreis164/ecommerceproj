@@ -2,6 +2,8 @@ package com.lntech.ecommerce.services;
 
 import com.lntech.ecommerce.domain.Categorie;
 import com.lntech.ecommerce.domain.Product;
+import com.lntech.ecommerce.dto.CategorieDTO;
+import com.lntech.ecommerce.dto.ProductDTO;
 import com.lntech.ecommerce.repositories.CategorieRepository;
 import com.lntech.ecommerce.repositories.ProductRepository;
 import com.lntech.ecommerce.services.exceptions.ObjectNotFoundException;
@@ -35,6 +37,4 @@ public class ProductService {
 
 
     }
-
-
 }
