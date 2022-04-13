@@ -5,6 +5,7 @@ import com.lntech.ecommerce.security.JWTUtil;
 import com.lntech.ecommerce.security.UserSS;
 import com.lntech.ecommerce.services.AuthService;
 import com.lntech.ecommerce.services.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class AuthContoller {
     @Autowired
     private AuthService authService;
 
-
+    @ApiOperation(value = "Atualização de token")
     @PostMapping(value = "/refresh_token")
     public ResponseEntity<Void> refreshToken(HttpServletResponse response){
         UserSS user = UserService.authenticated();
@@ -33,6 +34,7 @@ public class AuthContoller {
 
     }
 
+    @ApiOperation(value = "Recuperar senha")
     @PostMapping(value = "/forgot")
     public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO emailDTO){
         authService.sendNewPassword(emailDTO.getEmail());
