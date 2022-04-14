@@ -4,13 +4,13 @@
 ## Overview da API -
 
  <p align="center">
-  <img src="src/main/resources/templates/assets/imgs/ezgif.com-gif-maker.gif">
+  <img src="src/main/resources/templates/assets/imgs/ezgif.com-gif-maker (1).gif">
   </p>
 
 
 ## Testes básicos Postman -
  <p align="center">
-  <img src="src/main/resources/templates/assets/imgs/ezgif.com-gif-maker (1).gif">
+  <img src="src/main/resources/templates/assets/imgs/ezgif.com-gif-maker.gif">
   </p>
 
 
