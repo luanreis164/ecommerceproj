@@ -3,6 +3,9 @@ package com.lntech.ecommerce.controllers;
 import com.lntech.ecommerce.domain.Categorie;
 import com.lntech.ecommerce.dto.CategorieDTO;
 import com.lntech.ecommerce.services.CategorieService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,7 @@ public class CategorieController {
     @Autowired
     private CategorieService service;
 
+    @ApiOperation(value = "Lista categorias")
     @GetMapping
     public ResponseEntity<List<CategorieDTO>> findAll(){
         List<Categorie> list = service.findAll();
@@ -31,12 +35,14 @@ public class CategorieController {
         return ResponseEntity.ok().body(listDTO);
     }
 
+    @ApiOperation(value = "Busca por id")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Categorie> find(@PathVariable Integer id){
         Categorie obj = service.find(id);
         return  ResponseEntity.ok().body(obj);
     }
 
+    @ApiOperation(value = "Insere categoria")
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Categorie> insert(@Valid @RequestBody CategorieDTO objDto){
@@ -48,6 +54,7 @@ public class CategorieController {
         return ResponseEntity.created(uri).build();
     }
 
+    @ApiOperation(value = "Atualiza categoria")
     @PreAuthorize("hasAnyHole('ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Categorie> update(@Valid @RequestBody CategorieDTO objDto,@PathVariable Integer id ){
@@ -58,13 +65,17 @@ public class CategorieController {
 
     }
 
+    @ApiOperation(value = "Remove categoria")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+            @ApiResponse(code = 404, message = "Código inexistente") })
     @PreAuthorize("hasAnyHole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
+    @ApiOperation(value = "Retorna todas as categorias com paginação")
     @GetMapping(value = "/page")
     public ResponseEntity<Page<CategorieDTO>> findPage(
             @RequestParam(value = "page",defaultValue = "0")
@@ -81,6 +92,7 @@ public class CategorieController {
         return ResponseEntity.ok().body(listDTO);
     }
 
+    @ApiOperation(value = "Insere foto de categoria")
     @PostMapping(value = "/{id}")
     public ResponseEntity<Void> uploadCategoriePicture(@RequestParam(name = "file") MultipartFile multipartFile, @PathVariable Integer id){
         URI uri = service.uploadCategoriePicture(multipartFile,id);
